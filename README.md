@@ -31,7 +31,7 @@ Details
 How to use (Run Examples)
 -----
 
-* Default command (DQN, hard target update, CartPole-v1)
+* Default command (vanilla DQN, hard target update, CartPole-v1)
 
     ``python dqn_family``
 
