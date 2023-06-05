@@ -31,17 +31,17 @@ Details
 How to use (Run Examples)
 -----
 
-* Default Command (DQN, hard target update)
+* Default command (DQN, hard target update, CartPole-v1)
 
     ``python dqn_family``
 
-* D3QN with soft target update and PER
+* D3QN with soft target update and PER in Acrobot-v1 environment
 
-    ``python dqn_family --network_type=d3qn --use_soft_update --use_per``
+    ``python dqn_family --env Acrobot-v1 --network_type=d3qn --use_soft_update --use_per``
 
-* Best Performance Model Command (DDQN, soft target update)
+* Best performance model command in MountainCar-v0 environment (DDQN, soft target update)
 
-    ``python dqn_family --network_type=ddqn --use_soft_update``
+    ``python dqn_family --env MountainCar-v0 --network_type=ddqn --use_soft_update``
 
 * Implement Tensorboard
 
@@ -50,12 +50,11 @@ How to use (Run Examples)
 Experiment Results
 -----
 
-* The average score curves of vanilla DQN and its variants in the other CartPole-v1, Acrobot-v1, MountainCar-v0
-
+* The average score curves of vanilla DQN and its variants in the other CartPole-v1, Acrobot-v1, MountainCar-v0   
     <p align="left">
-        <img src="./results/CartPole-v1.svg" alt="hello" width="250" height="250"/>
-        <img src="./results/Acrobot-v1.svg" width="250" height="250"/>
-        <img src="./results/MountainCar-v0.svg" width="250" height="250"/>
+        <img src="./results/CartPole-v1.svg" width="250" height="250">
+        <img src="./results/Acrobot-v1.svg" width="250" height="250">
+        <img src="./results/MountainCar-v0.svg" width="250" height="250">
     </p>
 
 Reference
