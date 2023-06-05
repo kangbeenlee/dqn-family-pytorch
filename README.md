@@ -31,7 +31,7 @@ Details
 How to use (Run Examples)
 -----
 
-* Default command (vanilla DQN, hard target update, CartPole-v1)
+* Default (vanilla DQN, hard target update, CartPole-v1)
 
     ``python dqn_family``
 
@@ -39,7 +39,7 @@ How to use (Run Examples)
 
     ``python dqn_family --env Acrobot-v1 --network_type=d3qn --use_soft_update --use_per``
 
-* Best performance model command in MountainCar-v0 environment (DDQN, soft target update)
+* **Best performance** model in MountainCar-v0 environment (DDQN, soft target update)
 
     ``python dqn_family --env MountainCar-v0 --network_type=ddqn --use_soft_update``
 
