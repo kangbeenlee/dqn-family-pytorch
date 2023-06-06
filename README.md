@@ -33,15 +33,15 @@ How to use (Run Examples)
 
 * Default (vanilla DQN, hard target update, CartPole-v1)
 
-    ``python dqn_family``
+    ``python dqn_family.py``
 
 * D3QN with soft target update and PER in Acrobot-v1 environment
 
-    ``python dqn_family --env Acrobot-v1 --network_type=d3qn --use_soft_update --use_per``
+    ``python dqn_family.py --env Acrobot-v1 --network_type=d3qn --use_soft_update --use_per``
 
 * **Best performance** model in MountainCar-v0 environment (DDQN, soft target update)
 
-    ``python dqn_family --env MountainCar-v0 --network_type=ddqn --use_soft_update``
+    ``python dqn_family.py --env MountainCar-v0 --network_type=ddqn --use_soft_update``
 
 * Implement Tensorboard
 
