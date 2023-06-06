@@ -311,12 +311,12 @@ class Trainer:
         for param_group in optimizer.param_groups:
             return param_group['lr']
 
-    def updateTarget(self, episode):
+    def updateTarget(self, step):
         if self.use_soft_update:
             for param, target_param in zip(self.q_network.parameters(), self.target_q_network.parameters()):
                 target_param.data.copy_(self.tau * param.data + (1 - self.tau) * target_param.data)
         else:
-            if episode != 0 and episode % self.target_update_period == 0:
+            if step % self.target_update_period == 0:
                 self.target_q_network.load_state_dict(self.q_network.state_dict())
 
     def learn(self):
@@ -350,7 +350,7 @@ class Trainer:
                 if len(self.replay_buffer) > self.enough_memory_size_to_train:
                     loss = self.train()
                     self.writer.add_scalar("loss/train", loss, global_step=step)
-                    self.updateTarget(episode)
+                    self.updateTarget(step)
 
             # Epsilon decaying
             self.epsilon = max(self.min_epsilon,  self.epsilon * self.epsilon_decay_rate)
@@ -403,7 +403,7 @@ def main():
     parser.add_argument("--epsilon_decay_rate", type=float, default=0.995, help="Epsilon decaying rate")    
 
     # Target network update
-    parser.add_argument("--target_update_period", type=int, default=20, help="Target network update period")
+    parser.add_argument("--target_update_period", type=int, default=300, help="Target network update period")
     parser.add_argument("--use_soft_update", action="store_true", help="Use hard target network update")
     parser.add_argument("--tau", type=float, default=0.005, help="Soft target update parameter")
 
