@@ -240,6 +240,7 @@ class Trainer:
         self.target_q_network.load_state_dict(self.q_network.state_dict())
 
         # Target network update
+        self.train_update = 0
         self.target_update_period = args.target_update_period
         self.use_soft_update = args.use_soft_update
         self.tau = args.tau
@@ -266,6 +267,7 @@ class Trainer:
             return q_values.argmax().item()
 
     def train(self):
+        self.train_update += 1
         mini_batch = self.replay_buffer.sample()
         
         if self.use_per:
@@ -304,20 +306,19 @@ class Trainer:
             new_priorites = loss_for_prior + sys.float_info.epsilon
             self.replay_buffer.update_priorities(indices, new_priorites)
 
+        # Target update
+        if self.use_soft_update:
+            for param, target_param in zip(self.q_network.parameters(), self.target_q_network.parameters()):
+                target_param.data.copy_(self.tau * param.data + (1 - self.tau) * target_param.data)
+        else:
+            if self.train_update % self.target_update_period == 0:
+                self.target_q_network.load_state_dict(self.q_network.state_dict())
         
         return loss.data.item()
 
     def getLearningRate(self, optimizer):
         for param_group in optimizer.param_groups:
             return param_group['lr']
-
-    def updateTarget(self, step):
-        if self.use_soft_update:
-            for param, target_param in zip(self.q_network.parameters(), self.target_q_network.parameters()):
-                target_param.data.copy_(self.tau * param.data + (1 - self.tau) * target_param.data)
-        else:
-            if step % self.target_update_period == 0:
-                self.target_q_network.load_state_dict(self.q_network.state_dict())
 
     def learn(self):
         ##############################################
@@ -350,7 +351,6 @@ class Trainer:
                 if len(self.replay_buffer) > self.enough_memory_size_to_train:
                     loss = self.train()
                     self.writer.add_scalar("loss/train", loss, global_step=step)
-                    self.updateTarget(step)
 
             # Epsilon decaying
             self.epsilon = max(self.min_epsilon,  self.epsilon * self.epsilon_decay_rate)
