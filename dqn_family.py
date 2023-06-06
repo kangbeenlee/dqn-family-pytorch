@@ -367,17 +367,6 @@ class Trainer:
         self.writer.flush()
         self.writer.close()
 
-    def evaluate(self, episode_rewards):
-        # You can plot the another evaluation values.
-        # But, you should include the "episode_return".
-        plt.xlabel("Num Episode")
-        plt.ylabel("Episode returns")
-        plt.plot(episode_rewards, label='episode_return')
-        plt.legend()
-        plt.savefig('DQN Episode returns')
-        plt.show()
-        plt.close()
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', type=int, default=0, help='Random seed')
