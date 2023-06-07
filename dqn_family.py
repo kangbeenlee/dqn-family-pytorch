@@ -276,25 +276,25 @@ class Trainer:
             s, a, r, s_prime, done = mini_batch.values()
         
         if self.network_type == "dqn" or self.network_type == "dueling-dqn":
-            q = self.q_network(s).gather(1, a)
+            q_a = self.q_network(s).gather(1, a)
             with torch.no_grad():
                 max_q_prime = self.target_q_network(s_prime).max(1)[0].unsqueeze(1)
-                TD_target = r + self.gamma * max_q_prime * (1 - done)
+                td_target = r + self.gamma * max_q_prime * (1 - done)
         elif self.network_type == "ddqn" or self.network_type == "d3qn":
-            q = self.q_network(s).gather(1, a)
+            q_a = self.q_network(s).gather(1, a)
             with torch.no_grad():
                 optimal_a_prime = self.q_network(s_prime).max(1)[1].unsqueeze(1)
                 target_q_prime = self.target_q_network(s_prime).gather(1, optimal_a_prime)
-                TD_target = r + self.gamma * target_q_prime * (1 - done)
+                td_target = r + self.gamma * target_q_prime * (1 - done)
         else:
             sys.exit()
 
         # TD target must be fixed (use .detach() or no_grad())
         if self.use_per:
-            elementwise_loss = F.smooth_l1_loss(q, TD_target, reduction="none")
+            elementwise_loss = F.smooth_l1_loss(q_a, td_target, reduction="none")
             loss = torch.mean(elementwise_loss * weights)
         else:
-            loss = F.smooth_l1_loss(q, TD_target)
+            loss = F.smooth_l1_loss(q_a, td_target)
         
         self.optimizer.zero_grad()
         loss.backward()
