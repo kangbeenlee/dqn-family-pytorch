@@ -22,7 +22,8 @@ Details
 
 ### 2. Usable Types of DQN
 
-* DQN, Double-DQN (DDQN), Dueling-DQN, Dueling Double-DQN (D3QN)
+* DQN, Double-DQN (DDQN), Dueling-DQN, Dueling Double-DQN (D3QN)   
+* DRQN (RNNCell, GRUCell, LSTMCell, and LSTMCell with episodic update version)
 
 ### 3. Additional Techniques
 
@@ -45,6 +46,14 @@ How to use (Run Examples)
     ``python dqn_family.py --env Acrobot-v1 --network_type=ddqn --use_soft_update``   
     ``python dqn_family.py --env MountainCar-v0 --network_type=ddqn --use_soft_update``
 
+* DRQN with soft target update in partially observable CartPole-v1 environment   
+
+    ``python drqn_rnn_cell.py --use_soft_update``   
+    ``python drqn_gru_cell.py --use_soft_update``   
+    ``python drqn_lstm_cell.py --use_soft_update``   
+    ``python drqn_lstm_cell_episodic.py``   
+
+
 * Implement Tensorboard
 
     ``tensorboard --logdir=runs/{$env_name}``
@@ -52,12 +61,18 @@ How to use (Run Examples)
 Experiment Results
 -----
 
+### Fully Observable Environments
+
 * The average score curves of vanilla DQN and its variants in the other CartPole-v1, Acrobot-v1, MountainCar-v0   
     <p align="left">
         <img src="./results/CartPole-v1.svg" width="250" height="250">
         <img src="./results/Acrobot-v1.svg" width="250" height="250">
         <img src="./results/MountainCar-v0.svg" width="250" height="250">
     </p>
+
+### Partially Observable Environment (CartPole-v1)
+
+* Only cart's position and pole's angle are observed during training   
 
 Reference
 -----
