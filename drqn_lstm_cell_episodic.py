@@ -272,7 +272,7 @@ def main():
 
     # Training parameters
     parser.add_argument("--lr", type=float, default=5e-4, help="Learning rate")
-    parser.add_argument('--batch_size', default=32, type=int, help='Batch size')
+    parser.add_argument('--batch_size', default=64, type=int, help='Batch size')
 
     # Epsilon-greedy policy
     parser.add_argument("--epsilon", type=float, default=1.0, help="Initial epsilon")
@@ -280,13 +280,13 @@ def main():
     parser.add_argument("--epsilon_decay_rate", type=float, default=0.995, help="Epsilon decaying rate")    
 
     # Target network update
-    parser.add_argument("--target_update_period", type=int, default=20, help="Target network update period")
+    parser.add_argument("--target_update_period", type=int, default=10, help="Target network update period")
     
     # Experience replay
-    parser.add_argument('--memory_capacity', default=1000, type=int, help='Replay memory capacity')
+    parser.add_argument('--memory_capacity', default=10000, type=int, help='Replay memory capacity')
     parser.add_argument('--episode_limit', default=500, type=int,
                         help='Maximum number of steps per episode (500 for CartPole-v1, Acrobot-v1 and 200 for MountainCar-v0)')
-    parser.add_argument('--enough_memory_size_to_train', default=64, type=int, help='Batch size')
+    parser.add_argument('--enough_memory_size_to_train', default=200, type=int, help='Batch size')
     
     args = parser.parse_args()
     

@@ -248,7 +248,7 @@ class Trainer:
 
                 if len(self.episode_replay_buffer) > self.enough_memory_size_to_train:
                     loss = self.train()
-                    self.writer.add_scalar("loss", loss, global_step=epi_step)
+                    self.writer.add_scalar("loss", loss, global_step=step)
 
             # Epsilon decaying
             self.epsilon = max(self.min_epsilon,  self.epsilon * self.epsilon_decay_rate)
