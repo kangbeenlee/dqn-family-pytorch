@@ -292,7 +292,7 @@ def main():
     parser.add_argument("--tau", type=float, default=0.005, help="Soft target update parameter")
     
     # Experience replay
-    parser.add_argument('--memory_capacity', default=1000, type=int, help='Replay memory capacity')
+    parser.add_argument('--memory_capacity', default=10000, type=int, help='Replay memory capacity')
     parser.add_argument('--episode_limit', default=500, type=int,
                         help='Maximum number of steps per episode (500 for CartPole-v1, Acrobot-v1 and 200 for MountainCar-v0)')
     parser.add_argument('--enough_memory_size_to_train', default=20, type=int, help='Batch size')
