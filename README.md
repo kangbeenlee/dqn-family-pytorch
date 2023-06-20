@@ -65,9 +65,9 @@ Experiment Results
 
 * The average score curves of vanilla DQN and its variants in the other CartPole-v1, Acrobot-v1, MountainCar-v0.
     <p align="left">
-        <img src="./results/CartPole-v1.svg" width="250" height="250">
-        <img src="./results/Acrobot-v1.svg" width="250" height="250">
-        <img src="./results/MountainCar-v0.svg" width="250" height="250">
+        <img src="./results/CartPole-v1.svg" width="250">
+        <img src="./results/Acrobot-v1.svg" width="250">
+        <img src="./results/MountainCar-v0.svg" width="250">
     </p>
 
 ### Partially Observable Environment (CartPole-v1)
@@ -75,7 +75,7 @@ Experiment Results
 * Only cart's position and pole's angle are observed during training.
 * Below figure is training results of DRQN with RNNCell, GRUCell, LSTMCell, LSTMCell with episodic fashion.
     <p align="left">
-        <img src="./results/drqn.svg" width="250" height="250">
+        <img src="./results/drqn.svg" width="250">
     </p>
 
 Reference
